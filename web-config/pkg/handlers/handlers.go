@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Lien6410/learning-go/web-config/pkg/config"
+	"github.com/Lien6410/learning-go/web-config/pkg/models"
 	"github.com/Lien6410/learning-go/web-config/pkg/render"
 )
 
@@ -29,10 +30,17 @@ func NewHandlers(r *Repository) {
 
 // Home is the home page handler
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "home.page.html")
+	render.RenderTemplate(w, "home.page.html", &models.TemplateData{})
 }
 
 // About is the about page handler
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "about.page.html")
+	// perfrom some logic
+	stringMap := map[string]string{}
+	stringMap["test"] = "Hello, again."
+
+	// send the data to the template
+	render.RenderTemplate(w, "about.page.html", &models.TemplateData{
+		StringMap: stringMap,
+	})
 }
