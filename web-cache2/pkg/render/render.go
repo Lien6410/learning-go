@@ -14,7 +14,7 @@ func init() {
 
 // RenderTemplate renders template using html/template
 func RenderTemplateTest(w http.ResponseWriter, tmpl string) {
-	parssedTemplate, _ := template.ParseFiles("./web-cache1/templates/"+tmpl, "./web-cache1/templates/base.layout.html")
+	parssedTemplate, _ := template.ParseFiles("./web-cache2/templates/"+tmpl, "./web-cache2/templates/base.layout.html")
 
 	err := parssedTemplate.Execute(w, nil)
 	if err != nil {
@@ -53,8 +53,8 @@ func RenderTemplate(w http.ResponseWriter, t string) {
 
 func createTemplateCache(t string) error {
 	templates := []string{
-		fmt.Sprintf("./web-cache1/templates/%s", t),
-		"./web-cache1/templates/base.layout.html",
+		fmt.Sprintf("./web-cache2/templates/%s", t),
+		"./web-cache2/templates/base.layout.html",
 	}
 
 	// parse the template

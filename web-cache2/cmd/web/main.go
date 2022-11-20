@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Lien6410/learning-go/web-cache1/pkg/handlers"
+	"github.com/Lien6410/learning-go/web-cache2/pkg/handlers"
 )
 
 const portNumber = ":8080"
