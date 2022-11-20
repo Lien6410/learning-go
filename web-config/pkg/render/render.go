@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/Lien6410/learning-go/web-config/pkg/config"
 )
 
 func init() {
@@ -13,12 +15,21 @@ func init() {
 	// fmt.Println(v1)
 }
 
+var app *config.AppConfig
+
+// NewTemplate sets the config to the template package
+func NewTemplate(a *config.AppConfig) {
+	app = a
+}
+
 // RenderTemplate renders template using html/template
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
-	// create a template cache
-	tc, err := createTemplateCache()
-	if err != nil {
-		log.Fatal(err)
+	var tc map[string]*template.Template
+	if app.UseCache {
+		// get the template cache from the app config
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
 	}
 
 	// get request template from cache
@@ -28,21 +39,17 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	}
 
 	buf := new(bytes.Buffer)
-	err = t.Execute(buf, nil)
-	if err != nil {
-		log.Println(err)
-	}
 
-	// render the template
+	_ = t.Execute(buf, nil)
 
-	_, err = buf.WriteTo(w)
+	_, err := buf.WriteTo(w)
 	if err != nil {
-		log.Println(err)
+		log.Println("Error writing template to browser: ", err)
 	}
 
 }
 
-func createTemplateCache() (map[string]*template.Template, error) {
+func CreateTemplateCache() (map[string]*template.Template, error) {
 	// create an empty map[string]*template.Template
 	myCache := map[string]*template.Template{}
 
