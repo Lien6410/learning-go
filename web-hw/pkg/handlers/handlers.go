@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/lien6410/web-hw/pkg/render"
+	"github.com/Lien6410/learning-go/web-hw/pkg/render"
 )
 
 // Home is the home page handler

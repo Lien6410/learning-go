@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/lien6410/web-hw/pkg/handlers"
+	"github.com/Lien6410/learning-go/web-hw/pkg/handlers"
 )
 
 const portNumber = ":8080"
